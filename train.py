@@ -61,7 +61,7 @@ print(f"rsme:{root_mean_squared_error(y_test,y_pred):.4f}")
 os.makedirs(model_dir,exist_ok=True)
 
 joblib.dump(pipeline,os.path.join(model_dir,"paddy_pipeline.pkl"))
-joblib.dump(x_reduced.columns.tolist(),os.path.join(model_dir,"input_column.pkl"))
+joblib.dump(x_reduced.columns.tolist(),os.path.join(model_dir,"input_columns.pkl"))
 print("saved in:",model_dir)
 print(x_reduced.columns.tolist())
 
