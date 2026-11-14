@@ -5,7 +5,8 @@ import os
 import joblib
 from typing import List,Dict,Any
 
-model_dir = r"C:\Users\Infinix\Desktop\python.py\paddy.py\models"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model_dir = os.path.join(BASE_DIR, "models")
 
 pipeline = joblib.load(os.path.join(model_dir,"paddy_pipeline.pkl"))
 input_columns:List[str]=joblib.load(os.path.join(model_dir, "input_columns.pkl"))

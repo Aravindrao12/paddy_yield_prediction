@@ -10,7 +10,9 @@ import joblib
 import os
 from sklearn.model_selection import cross_val_score
 
-datapath=r"C:\Users\Infinix\Desktop\python.py\paddy.py\paddydataset.csv"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+datapath = os.path.join(BASE_DIR,"paddydataset.csv")
+model_dir=os.path.join(BASE_DIR,"models")
 target="Paddy yield(in Kg)"
 drop_col=[target,"Trash(in bundles)"]
 corr_thersold=0.95
@@ -56,18 +58,28 @@ print(f"Test r2:{r2_score(y_test,y_pred):.4f}")
 print(f"rsme:{root_mean_squared_error(y_test,y_pred):.4f}")
 
 
-cv_score=cross_val_score(pipeline,x_reduced,y,cv=5,scoring="r2",n_jobs=-1)
-print(f"5-flod CV r2:{cv_score.mean():.4f} (+/-{cv_score.std():.4f})")
+os.makedirs(model_dir,exist_ok=True)
 
-model_dir = r"C:\Users\Infinix\Desktop\python.py\paddy.py\models"
-os.makedirs(model_dir, exist_ok=True)
-
-joblib.dump(pipeline, os.path.join(model_dir, "paddy_pipeline.pkl"))
-joblib.dump(x_reduced.columns.tolist(), os.path.join(model_dir, "input_columns.pkl"))
-print("saved in:", model_dir)
-
-
+joblib.dump(pipeline,os.path.join(model_dir,"paddy_pipeline.pkl"))
+joblib.dump(x_reduced.columns.tolist(),os.path.join(model_dir,"input_column.pkl"))
+print("saved in:",model_dir)
 print(x_reduced.columns.tolist())
+
+
+
+
+# cv_score=cross_val_score(pipeline,x_reduced,y,cv=5,scoring="r2",n_jobs=-1)
+# print(f"5-flod CV r2:{cv_score.mean():.4f} (+/-{cv_score.std():.4f})")
+
+# model_dir = r"C:\Users\Infinix\Desktop\python.py\paddy.py\models"
+# os.makedirs(model_dir, exist_ok=True)
+
+# joblib.dump(pipeline, os.path.join(model_dir, "paddy_pipeline.pkl"))
+# joblib.dump(x_reduced.columns.tolist(), os.path.join(model_dir, "input_columns.pkl"))
+# print("saved in:", model_dir)
+
+
+# print(x_reduced.columns.tolist())
 
 
 
