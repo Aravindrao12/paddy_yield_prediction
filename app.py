@@ -47,15 +47,15 @@ class PaddyInput(BaseModel):
 def home():
     return {"message": "Paddy Yield API is running"}
 
-# @app.get("/options")
-# def options():
-#     prep = pipeline.named_steps["preprocessor"]
-#     result = {}
-#     for name, trans, cols in prep.transformers_:
-#         if name == "cat":
-#             for col, cats in zip(cols, trans.categories_):
-#                 result[col] = [str(c) for c in cats]
-#     return result
+@app.get("/options")
+def options():
+    prep = pipeline.named_steps["preprocessor"]
+    result = {}
+    for name, trans, cols in prep.transformers_:
+        if name == "cat":
+            for col, cats in zip(cols, trans.categories_):
+                result[col] = [str(c) for c in cats]
+    return result
 
 
 @app.post("/predict")
