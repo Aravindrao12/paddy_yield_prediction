@@ -7,10 +7,23 @@ API_URL = os.getenv("API_URL","http://127.0.0.1:8000").rstrip("/")
 st.title("Paddy Yield Prediction")
 
 # Dropdown values come from FastAPI (/options)
-try:
-    opts = requests.get(f"{API_URL}/options").json()
-except requests.exceptions.ConnectionError:
-    st.error("FastAPI server is not running.")
+def load_options():
+    for _ in range(6):
+        try:
+            r = requests.get(f"{API_URL}/options", timeout=30)
+            if r.status_code == 200:
+                return r.json()
+        except (requests.exceptions.RequestException, ValueError):
+            pass
+        time.sleep(10)
+    return None
+
+
+with st.spinner("Connecting to the server (it can take about a minute to wake up)..."):
+    opts = load_options()
+
+if opts is None:
+    st.error("Cannot reach the API. Check the API_URL setting, then refresh in a minute.")
     st.stop()
 
 # Input widgets
