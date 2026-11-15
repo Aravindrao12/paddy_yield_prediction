@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>paddy yield predition</h2>
+    <form id="paddyform">
+        Hectares<br>
+        <input id="Hectares" placeholder="Hectares" required><br><br>
+        Agriblock<br>
+        <select id="Agriblock">
+            <option>Chinnasalem</option>
+            <option>Cuddalore</option>
+            <option>Kallakurichi</option>
+            <option>Kurinjipadi</option>
+            <option>Panruti</option>
+            <option>Sankarapuram</option>
+        </select><br><br>
+        Variety<br>
+        <select id="Variety">
+            <option>CO_43</option>
+            <option>delux ponni</option>
+            <option>ponmani</option>
+        </select><br><br>
+        Soil_Types<br>
+        <select id="Soil_Types">
+            <option>alluvial</option>
+            <option>clay</option>
+        </select><br><br>
+        Nursery<br>
+        <select id="Nursery">
+            <option>dry</option>
+            <option>wet</option>
+        </select><br><br>
+        Rain_30D<br>
+        <input id="Rain_30D" placeholder="Rain_30D" required><br><br>
+        Rain_30_50D<br>
+        <input id="Rain_30_50D" placeholder="Rain_30_50D" required><br><br>
+        Min_temp_D1_D30<br>
+        <input id="Min_temp_D1_D30" placeholder="Min_temp_D1_D30" required><br><br>
+        Max_temp_D1_D30<br>
+        <input id="Max_temp_D1_D30" placeholder="Max_temp_D1_D30" required><br><br>
+        Min_temp_D31_D60<br>
+        <input id="Min_temp_D31_D60" placeholder="Min_temp_D31_D60" required><br><br>
+        Max_temp_D31_D60<br>
+        <input id="Max_temp_D31_D60" placeholder="Max_temp_D31_D60" required><br><br>
+        Max_temp_D61_D90<br>
+        <input id="Max_temp_D61_D90" placeholder="Max_temp_D61_D90" required><br><br>
+        Min_temp_D91_D120<br>
+        <input id="Min_temp_D91_D120" placeholder="Min_temp_D91_D120" required><br><br>
+        Wind_Speed_D1_D30<br>
+        <input id="Wind_Speed_D1_D30" placeholder="Wind_Speed_D1_D30" required><br><br>
+        Wind_Speed_D31_D60<br>
+        <input id="Wind_Speed_D31_D60" placeholder="Wind_Speed_D31_D60" required><br><br>
+        Wind_Speed_D61_D90<br>
+        <input id="Wind_Speed_D61_D90" placeholder="Wind_Speed_D61_D90" required><br><br>
+        Wind_Speed_D91_D120<br>
+        <input id="Wind_Speed_D91_D120" placeholder="Wind_Speed_D91_D120" required><br><br>
+        Wind_Dir_D1_D30<br>
+        <select id="Wind_Dir_D1_D30">
+            <option>E</option>
+            <option>ENE</option>
+            <option>NW</option>
+            <option>SSE</option>
+            <option>SW</option>
+            <option>W</option>
+        </select><br><br>
+        Wind_Dir_D31_D60<br>
+        <select id="Wind_Dir_D31_D60">
+            <option>ENE</option>
+            <option>NE</option>
+            <option>S</option>
+            <option>W</option>
+            <option>WNW</option>
+        </select><br><br>
+        Wind_Dir_D61_D90<br>
+        <select id="Wind_Dir_D61_D90">
+            <option>"NE"</option>
+            <option>"NNE"</option>
+            <option>"NNW"</option>
+            <option>"SE"</option>
+            <option>"SW"</option>
+        </select><br><br>
+        Wind_Dir_D91_D120<br>
+        <select id="Wind_Dir_D91_D120">
+            <option>"NNW"</option>
+            <option>"NW"</option>
+            <option>"S"</option>
+            <option>"SSE"</option>
+            <option>W</option>
+            <option>WSW</option>
+        </select><br><br>
+        Humidity_D1_D30<br>
+        <input id="Humidity_D1_D30" placeholder="Humidity_D1_D30" required><br><br>
+        Humidity_D31_D60<br>
+        <input id="Humidity_D31_D60" placeholder="Humidity_D31_D60" required><br><br>
+        Humidity_D61_D90<br>
+        <input id="Humidity_D61_D90" placeholder="Humidity_D61_D90" required><br><br>
+        Humidity_D91_D120<br>
+        <input id="Humidity_D91_D120" placeholder="Humidity_D91_D120" required><br><br>
+        <button type="submit">predict</button>
+    </form>
+    <h3 id="result"></h3>
+    <script>
+       const API_URL="https://paddy-yield-prediction-96iv.onrender.com";
+        function num(id){
+            return Number(document.getElementById(id).value);
+
+        }
+        function text(id){
+            return document.getElementById(id).value;
+        }
+
+        document.getElementById("paddyform").onsubmit=async function (event) {
+            event.preventeDefault();
+            document.getElementById("result").innerText="Predicting...";
+            let data={
+                 "Hectares": num("Hectares"),
+                "Agriblock": text("Agriblock"),
+                "Variety": text("Variety"),
+                "Soil Types": text("Soil_Types"),
+                "Nursery": text("Nursery"),
+                "30DRain( in mm)": num("Rain_30D"),
+                "30_50DRain( in mm)": num("Rain_30_50D"),
+                "Min temp_D1_D30": num("Min_temp_D1_D30"),
+                "Max temp_D1_D30": num("Max_temp_D1_D30"),
+                "Min temp_D31_D60": num("Min_temp_D31_D60"),
+                "Max temp_D31_D60": num("Max_temp_D31_D60"),
+                "Max temp_D61_D90": num("Max_temp_D61_D90"),
+                "Min temp_D91_D120": num("Min_temp_D91_D120"),
+                "Inst Wind Speed_D1_D30(in Knots)": num("Wind_Speed_D1_D30"),
+                "Inst Wind Speed_D31_D60(in Knots)": num("Wind_Speed_D31_D60"),
+                "Inst Wind Speed_D61_D90(in Knots)": num("Wind_Speed_D61_D90"),
+                "Inst Wind Speed_D91_D120(in Knots)": num("Wind_Speed_D91_D120"),
+                "Wind Direction_D1_D30": text("Wind_Dir_D1_D30"),
+                "Wind Direction_D31_D60": text("Wind_Dir_D31_D60"),
+                "Wind Direction_D61_D90": text("Wind_Dir_D61_D90"),
+                "Wind Direction_D91_D120": text("Wind_Dir_D91_D120"),
+                "Relative Humidity_D1_D30": num("Humidity_D1_D30"),
+                "Relative Humidity_D31_D60": num("Humidity_D31_D60"),
+                "Relative Humidity_D61_D90": num("Humidity_D61_D90"),
+                "Relative Humidity_D91_D120": num("Humidity_D91_D120")    
+            };
+            try{
+                let responde = await fetch(API_URL+"/predict",{
+                    method:"POST",
+                    headers:{"Content-Type":"applicaton/json"},
+                    body:JSON.stringify(data)
+                });
+                let result=await response.json();
+                if (response.ok){
+                    document.getElementById("result").innerText="predicted failed: "+ result.predicted__yield_kg+"kg";
+
+                } else{
+                    document.getElementById("result").innerText="predition failed:"+JSON(result.detail);
+                }
+            } catch(error){
+                document.getElementById("result").innerText="Connot reach the sever. Try again in a minute,";
+            };
+          
+        };
+
+    </script>
+</body>
+</html>

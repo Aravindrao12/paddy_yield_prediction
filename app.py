@@ -4,6 +4,7 @@ import pandas as pd
 import os 
 import joblib
 from typing import List,Dict,Any
+from fastapi.middleware.cors import CORSMiddleware
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 model_dir = os.path.join(BASE_DIR, "models")
@@ -15,6 +16,12 @@ app=FastAPI(
     title="paddy yield prediction API",
     description="predict paddy yield using randomforestregression",
     version="1.0",
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 class PaddyInput(BaseModel):
     Hectares: int
