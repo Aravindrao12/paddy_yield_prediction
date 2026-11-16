@@ -152,10 +152,10 @@
                 });
                 let result=await response.json();
                 if (response.ok){
-                    document.getElementById("result").innerText="predicted yield: "+ result.predicted_yield_kg+"kg";
+                    document.getElementById("result").innerText="predicted yield: "+ result.predicted_yield_kg + "kg";
 
                 } else{
-                    document.getElementById("result").innerText="predition failed:"+JSON(result.detail);
+                    document.getElementById("result").innerText="predition failed: "+ JSON.stringify(result.detail);
                 }
             } catch(error){
                 document.getElementById("result").innerText="Connot reach the sever. Try again in a minute,";
