@@ -24,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 class PaddyInput(BaseModel):
-    Hectares: int
+    Hectares: float
     Agriblock: str
     Variety: str
     Soil_Types: str = Field(..., alias="Soil Types")
