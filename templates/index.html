@@ -78,18 +78,18 @@
         </select><br><br>
         Wind_Dir_D61_D90<br>
         <select id="Wind_Dir_D61_D90">
-            <option>"NE"</option>
-            <option>"NNE"</option>
-            <option>"NNW"</option>
-            <option>"SE"</option>
-            <option>"SW"</option>
+            <option>NE</option>
+            <option>NNE</option>
+            <option>NNW</option>
+            <option>SE</option>
+            <option>SW</option>
         </select><br><br>
         Wind_Dir_D91_D120<br>
         <select id="Wind_Dir_D91_D120">
-            <option>"NNW"</option>
-            <option>"NW"</option>
-            <option>"S"</option>
-            <option>"SSE"</option>
+            <option>NNW</option>
+            <option>NW</option>
+            <option>S</option>
+            <option>SSE</option>
             <option>W</option>
             <option>WSW</option>
         </select><br><br>
@@ -105,7 +105,7 @@
     </form>
     <h3 id="result"></h3>
     <script>
-       const API_URL="https://paddy-yield-prediction-96iv.onrender.com";
+       const API_URL="https://paddy-yield-prediction-96iv.onrender";
         function num(id){
             return Number(document.getElementById(id).value);
 
@@ -145,14 +145,14 @@
                 "Relative Humidity_D91_D120": num("Humidity_D91_D120")    
             };
             try{
-                let responde = await fetch(API_URL+"/predict",{
+                let response = await fetch(API_URL+"/predict",{
                     method:"POST",
-                    headers:{"Content-Type":"applicaton/json"},
+                    headers:{"Content-Type":"application/json"},
                     body:JSON.stringify(data)
                 });
                 let result=await response.json();
                 if (response.ok){
-                    document.getElementById("result").innerText="predicted failed: "+ result.predicted__yield_kg+"kg";
+                    document.getElementById("result").innerText="predicted yield: "+ result.predicted_yield_kg+"kg";
 
                 } else{
                     document.getElementById("result").innerText="predition failed:"+JSON(result.detail);
